@@ -10,9 +10,12 @@ export const MeetingList = () => {
       {error && <div>{error.message}</div>}
       {!error && meetings && (
         <ul>
-          {meetings.map(meeting => (
-            <li key={camelCase(meeting.name)}>{meeting.toString()}</li>
-          ))}
+          {meetings.map(
+            meeting =>
+              !!meeting.name && (
+                <li key={camelCase(meeting.name)}>{meeting.toString()}</li>
+              )
+          )}
         </ul>
       )}
     </>
