@@ -7,19 +7,20 @@ import "antd/dist/antd.css"
 import { Clock } from "./clock"
 import { ContainerVertical } from "./containerVertical"
 
-const DURATION = moment.duration(15, "minutes").asSeconds()
-const START = moment().set({
-  hour: 20,
-  minute: 55,
-  second: 0,
-})
 const GREEN = "#48a9a6"
 const ORANGE = "#FC9E4F"
 const RED = "#FF4D4F"
 
-export const ProgressStatus = () => {
+export const ProgressStatus = ({ duration, startHour, startMinute }) => {
   const [percent, setPercent] = useState(0)
   const [color, setColor] = useState(GREEN)
+
+  const DURATION = moment.duration(duration, "minutes").asSeconds()
+  const START = moment().set({
+    hour: startHour,
+    minute: startMinute,
+    second: 0,
+  })
 
   useEffect(() => {
     const increment = () => {
@@ -42,7 +43,7 @@ export const ProgressStatus = () => {
     return () => {
       clearInterval(interval)
     }
-  }, [])
+  })
 
   return (
     <ContainerVertical>
