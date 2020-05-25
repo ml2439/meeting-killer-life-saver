@@ -1,6 +1,5 @@
 import React from "react"
 import { useMeetings } from "../../hooks/useMeetings"
-import { camelCase } from "../../utils/camelCase"
 
 export const MeetingList = () => {
   const [meetings, error] = useMeetings()
@@ -10,12 +9,9 @@ export const MeetingList = () => {
       {error && <div>{error.message}</div>}
       {!error && meetings && (
         <ul>
-          {meetings.map(
-            meeting =>
-              !!meeting.name && (
-                <li key={camelCase(meeting.name)}>{meeting.toString()}</li>
-              )
-          )}
+          {meetings.map(m => (
+            <li key={m.id}>{m.meeting.toString()}</li>
+          ))}
         </ul>
       )}
     </>

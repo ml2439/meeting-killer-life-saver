@@ -13,8 +13,11 @@ export const useMeetings = () => {
       .withConverter(meetingConverter)
       .onSnapshot(
         snapshot => {
-          const meetingsData = snapshot.docs.map(doc => doc.data())
-          setMeetings(meetingsData)
+          setMeetings(
+            snapshot.docs.map(doc => {
+              return { id: doc.id, meeting: doc.data() }
+            })
+          )
         },
         error => {
           setError(error)
