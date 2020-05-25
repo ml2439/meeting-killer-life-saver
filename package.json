@@ -12,7 +12,6 @@
     "gatsby": "^2.19.45",
     "gatsby-plugin-emotion": "^4.2.0",
     "gatsby-plugin-firebase": "^0.2.0-beta.4",
-    "gatsby-plugin-google-analytics": "^2.2.0",
     "gatsby-plugin-manifest": "^2.3.1",
     "gatsby-plugin-react-helmet": "^3.2.1",
     "moment": "^2.25.3",
