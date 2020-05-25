@@ -14,8 +14,6 @@ import moment from "moment"
 import { Meeting, meetingConverter } from "../../data/meeting"
 import { camelCase } from "../../utils/camelCase"
 
-const db = firebase.firestore()
-
 const layout = {
   labelCol: {
     span: 8,
@@ -74,7 +72,9 @@ export const MeetingForm = () => {
   const handleSubmit = ({ name, duration, start }) => {
     const newMeeting = new Meeting(name, duration, start.hour(), start.minute())
 
-    db.collection("meetings")
+    firebase
+      .firestore()
+      .collection("meetings")
       .doc(camelCase(name))
       .withConverter(meetingConverter)
       .set(newMeeting)

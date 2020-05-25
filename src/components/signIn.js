@@ -6,8 +6,6 @@ import { Button, notification } from "antd"
 export const SignIn = () => {
   const isSignedIn = useUserStatus()
 
-  const provider = new firebase.auth.GoogleAuthProvider()
-
   const handleSignInSignOut = () => {
     if (isSignedIn) {
       firebase
@@ -26,7 +24,7 @@ export const SignIn = () => {
     } else {
       firebase
         .auth()
-        .signInWithPopup(provider)
+        .signInWithPopup(new firebase.auth.GoogleAuthProvider())
         .then(() => {
           notification.success({
             message: "Successfully Signed in",
