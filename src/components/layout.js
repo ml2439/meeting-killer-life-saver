@@ -3,6 +3,8 @@ import { Global, css } from "@emotion/core"
 import styled from "@emotion/styled"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import { Layout, Menu } from "antd"
+import { SignIn } from "./signIn"
+
 const { Header, Content, Footer } = Layout
 
 const globalCss = css`
@@ -23,6 +25,12 @@ const Logo = styled.div`
   margin: 16px 28px 16px 0;
   float: left;
   color: white;
+`
+const SignInContainer = styled.div`
+  height: 31px;
+  line-height: 31px;
+  margin: 16px 28px 16px 0;
+  float: right;
 `
 
 export const MyLayout = ({ children }) => {
@@ -46,6 +54,9 @@ export const MyLayout = ({ children }) => {
           <Link to="/">
             <Logo>{data.site.siteMetadata.title}</Logo>
           </Link>
+          <SignInContainer>
+            <SignIn />
+          </SignInContainer>
           <Menu theme="dark" mode="horizontal">
             <Menu.Item key="home">
               <Link to="/">Home</Link>

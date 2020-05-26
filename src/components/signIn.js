@@ -39,7 +39,7 @@ export const SignIn = () => {
   }
 
   return (
-    <Button onClick={handleSignInSignOut}>
+    <Button onClick={handleSignInSignOut} shape="round">
       {isSignedIn ? "Sign out" : "Sign in"}
     </Button>
   )
