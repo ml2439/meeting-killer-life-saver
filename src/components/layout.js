@@ -55,7 +55,7 @@ export const MyLayout = ({ children }) => {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content>{children}</Content>
+        <Content style={{ margin: "2rem 0" }}>{children}</Content>
       </AboveFooter>
       <Footer>{`${
         data.site.siteMetadata.title

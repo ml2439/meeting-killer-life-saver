@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Select, Row, Col } from "antd"
+import { Select, Row, Space } from "antd"
 import { useMeetings } from "../hooks/useMeetings"
 import { ProgressStatus } from "./progressStatus"
 
@@ -14,12 +14,13 @@ export const MeetingProgress = () => {
   }
 
   return (
-    <Row justify="center" align="middle">
-      <Col xs={24} md={6}>
+    <Row justify="center" align="top">
+      <Space direction="vertical" size="middle" align="center">
         <Select
           showSearch
           placeholder="Select a meeting"
-          style={{ width: "100%" }}
+          style={{ width: "25rem" }}
+          size="large"
           onChange={handleChange}
         >
           {meetings.map(m => (
@@ -28,8 +29,6 @@ export const MeetingProgress = () => {
             </Option>
           ))}
         </Select>
-      </Col>
-      <Col xs={24} md={8}>
         {!!selected && (
           <ProgressStatus
             duration={selected.duration}
@@ -37,7 +36,7 @@ export const MeetingProgress = () => {
             startMinute={selected.startMinute}
           />
         )}
-      </Col>
+      </Space>
     </Row>
   )
 }

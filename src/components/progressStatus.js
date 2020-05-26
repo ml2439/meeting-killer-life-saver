@@ -2,10 +2,9 @@
 import { jsx } from "@emotion/core"
 import { useState, useEffect } from "react"
 import moment from "moment"
-import { Progress } from "antd"
+import { Progress, Space } from "antd"
 import "antd/dist/antd.css"
 import { Clock } from "./clock"
-import { ContainerVertical } from "./containerVertical"
 
 const GREEN = "#48a9a6"
 const ORANGE = "#FC9E4F"
@@ -46,7 +45,7 @@ export const ProgressStatus = ({ duration, startHour, startMinute }) => {
   })
 
   return (
-    <ContainerVertical>
+    <Space direction="vertical" align="center">
       <Progress
         type="circle"
         width={180}
@@ -55,6 +54,6 @@ export const ProgressStatus = ({ duration, startHour, startMinute }) => {
         format={percent => (percent === 100 ? `Time's up` : `${percent}%`)}
       />
       <Clock />
-    </ContainerVertical>
+    </Space>
   )
 }

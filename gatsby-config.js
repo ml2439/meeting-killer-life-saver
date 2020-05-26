@@ -5,7 +5,7 @@ module.exports = {
     title: `Meeting Killer Life Saver`,
     description: `Say bye to overtime meetings.`,
     author: `ML`,
-    url: `https://meeting-killer.netlify.app/`,
+    url: `https://meetingkiller.netlify.app/`,
   },
   plugins: [
     `gatsby-plugin-emotion`,
