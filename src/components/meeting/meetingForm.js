@@ -81,6 +81,7 @@ export const MeetingForm = props => {
         notification.success({
           message: `Successfully created meeting: ${name}`,
         })
+        props.onSubmitSuccess()
       })
       .catch(error => {
         notification.error({

@@ -34,7 +34,7 @@ export const MeetingDrawer = props => {
         onClose={onClose}
         visible={visible}
       >
-        <MeetingForm meeting={props.meeting} />
+        <MeetingForm meeting={props.meeting} onSubmitSuccess={onClose} />
       </Drawer>
     </>
   )
