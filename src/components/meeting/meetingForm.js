@@ -8,7 +8,6 @@ import {
   InputNumber,
 } from "antd"
 import firebase from "gatsby-plugin-firebase"
-import moment from "moment"
 import { Meeting, meetingConverter } from "../../data/meeting"
 import { camelCase } from "../../utils/camelCase"
 
