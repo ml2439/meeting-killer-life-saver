@@ -9,14 +9,12 @@ export class Meeting {
   }
 
   toString() {
-    const startTime = this.getStartTime()
+    const startTime = this.getStartTime().format("HH:mm")
     return `Starts at: ${startTime}. Duration: ${this.duration} minutes.`
   }
 
   getStartTime() {
-    return moment(`${this.startHour}${this.startMinute}`, "hhmm").format(
-      "HH:mm"
-    )
+    return moment(`${this.startHour}${this.startMinute}`, "hhmm")
   }
 }
 

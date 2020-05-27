@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { Drawer, Button } from "antd"
 import { MeetingForm } from "./meetingForm"
 
-export const MeetingDrawer = () => {
+export const MeetingDrawer = props => {
   const [visible, setVisible] = useState(false)
 
   const showDrawer = () => {
@@ -13,11 +13,19 @@ export const MeetingDrawer = () => {
     setVisible(false)
   }
 
+  const button = props.meeting ? (
+    <Button type="link" onClick={showDrawer}>
+      Edit
+    </Button>
+  ) : (
+    <Button type="primary" onClick={showDrawer}>
+      Add a Meeting
+    </Button>
+  )
+
   return (
     <>
-      <Button type="link" onClick={showDrawer}>
-        Edit
-      </Button>
+      {button}
       <Drawer
         width={`50%`}
         title="Meeting Editor"
@@ -26,7 +34,7 @@ export const MeetingDrawer = () => {
         onClose={onClose}
         visible={visible}
       >
-        <MeetingForm />
+        <MeetingForm meeting={props.meeting} />
       </Drawer>
     </>
   )

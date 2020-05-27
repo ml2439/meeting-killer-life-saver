@@ -60,13 +60,15 @@ const fields = {
   },
 }
 
-const initialValues = {
-  name: "Workflow Standup",
-  duration: 30,
-  start: moment("11:00", "HH:mm"),
-}
+export const MeetingForm = props => {
+  const initialValues = props.meeting
+    ? {
+        name: props.meeting.name,
+        duration: props.meeting.duration,
+        start: props.meeting.getStartTime(),
+      }
+    : null
 
-export const MeetingForm = () => {
   const handleSubmit = ({ name, duration, start }) => {
     const newMeeting = new Meeting(name, duration, start.hour(), start.minute())
 
@@ -96,7 +98,7 @@ export const MeetingForm = () => {
       onFinish={handleSubmit}
     >
       <Form.Item {...fields.name}>
-        <Input />
+        <Input disabled={!!initialValues} />
       </Form.Item>
       <Form.Item {...fields.start}>
         <TimePicker format="HH:mm" />
