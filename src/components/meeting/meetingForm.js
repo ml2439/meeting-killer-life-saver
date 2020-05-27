@@ -93,8 +93,8 @@ export const MeetingForm = props => {
   return (
     <Form
       {...layout}
+      name="meeting-editor"
       initialValues={initialValues}
-      name="new-meeting"
       onFinish={handleSubmit}
     >
       <Form.Item {...fields.name}>

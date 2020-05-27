@@ -18,7 +18,7 @@ export const MeetingDrawer = props => {
       Edit
     </Button>
   ) : (
-    <Button type="primary" onClick={showDrawer}>
+    <Button type="link" size="large" onClick={showDrawer}>
       Add a Meeting
     </Button>
   )
