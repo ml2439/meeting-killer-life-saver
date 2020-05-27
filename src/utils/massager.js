@@ -9,3 +9,7 @@ export const camelCase = str => {
     })
     .replace(/\s+/g, "")
 }
+
+export const twoDigitTime = i => {
+  return i < 10 ? "0" + i : i
+}

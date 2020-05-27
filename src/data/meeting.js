@@ -1,4 +1,5 @@
 import moment from "moment"
+import { twoDigitTime } from "../utils/massager"
 
 export class Meeting {
   constructor(name, duration, startHour, startMinute) {
@@ -9,12 +10,15 @@ export class Meeting {
   }
 
   toString() {
-    const startTime = this.getStartTime().format("HH:mm")
+    const startTime = this.getStartMoment().format("HH:mm")
     return `Starts at: ${startTime}. Duration: ${this.duration} minutes.`
   }
 
-  getStartTime() {
-    return moment(`${this.startHour}${this.startMinute}`, "hhmm")
+  getStartMoment() {
+    return moment(
+      `${twoDigitTime(this.startHour)}${twoDigitTime(this.startMinute)}`,
+      "hhmm"
+    )
   }
 }
 

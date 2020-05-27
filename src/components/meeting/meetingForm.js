@@ -9,7 +9,7 @@ import {
 } from "antd"
 import firebase from "gatsby-plugin-firebase"
 import { Meeting, meetingConverter } from "../../data/meeting"
-import { camelCase } from "../../utils/camelCase"
+import { camelCase } from "../../utils/massager"
 
 const layout = {
   labelCol: {
@@ -64,7 +64,7 @@ export const MeetingForm = props => {
     ? {
         name: props.meeting.name,
         duration: props.meeting.duration,
-        start: props.meeting.getStartTime(),
+        start: props.meeting.getStartMoment(),
       }
     : null
 
