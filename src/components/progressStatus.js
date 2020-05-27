@@ -51,6 +51,7 @@ export const ProgressStatus = ({ duration, startHour, startMinute }) => {
         width={180}
         percent={percent}
         strokeColor={color}
+        strokeWidth={4}
         format={percent => (percent === 100 ? `Time's up` : `${percent}%`)}
       />
       <Clock />

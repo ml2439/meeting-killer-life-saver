@@ -16,9 +16,6 @@ const globalCss = css`
     margin: 0;
   }
 `
-const AboveFooter = styled.div`
-  min-height: calc(100vh - 70px);
-`
 const Logo = styled.div`
   height: 31px;
   line-height: 31px;
@@ -49,7 +46,7 @@ export const MyLayout = ({ children }) => {
   return (
     <>
       <Global styles={globalCss} />
-      <AboveFooter>
+      <Layout style={{ minHeight: "100vh" }}>
         <Header>
           <Link to="/">
             <Logo>{data.site.siteMetadata.title}</Logo>
@@ -66,11 +63,15 @@ export const MyLayout = ({ children }) => {
             </Menu.Item>
           </Menu>
         </Header>
-        <Content style={{ margin: "2rem 0" }}>{children}</Content>
-      </AboveFooter>
-      <Footer>{`${
-        data.site.siteMetadata.title
-      }, COVID-19 Edition © ${new Date().getFullYear()}, Mengqiao`}</Footer>
+        <Content style={{ padding: "2rem 0", background: "white" }}>
+          {children}
+        </Content>
+        <Footer>
+          {`${
+            data.site.siteMetadata.title
+          }, COVID-19 Edition © ${new Date().getFullYear()}, Mengqiao`}
+        </Footer>
+      </Layout>
     </>
   )
 }

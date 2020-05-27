@@ -10,7 +10,7 @@ export class Meeting {
 
   toString() {
     const startTime = this.getStartTime()
-    return `${this.name}: Starts at ${startTime}. Lasts ${this.duration} minutes.`
+    return `Starts at: ${startTime}. Duration: ${this.duration} minutes.`
   }
 
   getStartTime() {

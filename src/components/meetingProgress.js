@@ -32,8 +32,7 @@ export const MeetingProgress = () => {
           </Select>
           {!!selected && (
             <Card style={{ width: "25rem" }} bordered={false} size="small">
-              <p>{`Starts at: ${selected.getStartTime()}`}</p>
-              <p>{`Duration: ${selected.duration} minutes`}</p>
+              <p>{selected.toString()}</p>
             </Card>
           )}
         </div>

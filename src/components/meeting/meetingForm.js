@@ -1,7 +1,5 @@
 import React from "react"
 import {
-  Row,
-  Col,
   Form,
   Input,
   Button,
@@ -91,31 +89,27 @@ export const MeetingForm = () => {
   }
 
   return (
-    <Row>
-      <Col span={12} offset={6}>
-        <Form
-          {...layout}
-          initialValues={initialValues}
-          name="new-meeting"
-          onFinish={handleSubmit}
-        >
-          <Form.Item {...fields.name}>
-            <Input />
-          </Form.Item>
-          <Form.Item {...fields.start}>
-            <TimePicker format="HH:mm" />
-          </Form.Item>
-          <Form.Item {...fields.duration}>
-            <InputNumber min={0} />
-          </Form.Item>
+    <Form
+      {...layout}
+      initialValues={initialValues}
+      name="new-meeting"
+      onFinish={handleSubmit}
+    >
+      <Form.Item {...fields.name}>
+        <Input />
+      </Form.Item>
+      <Form.Item {...fields.start}>
+        <TimePicker format="HH:mm" />
+      </Form.Item>
+      <Form.Item {...fields.duration}>
+        <InputNumber min={0} />
+      </Form.Item>
 
-          <Form.Item {...tailLayout}>
-            <Button type="primary" htmlType="submit">
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Col>
-    </Row>
+      <Form.Item {...tailLayout}>
+        <Button type="primary" htmlType="submit">
+          Submit
+        </Button>
+      </Form.Item>
+    </Form>
   )
 }
