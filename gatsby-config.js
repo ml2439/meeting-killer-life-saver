@@ -3,6 +3,7 @@ require("dotenv").config()
 module.exports = {
   siteMetadata: {
     title: `Meeting Killer Life Saver`,
+    titleShort: `MKLS`,
     description: `Say bye to overtime meetings.`,
     author: `ML`,
     url: `https://meetingkiller.netlify.app/`,

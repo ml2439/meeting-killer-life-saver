@@ -16,26 +16,24 @@ export const MeetingProgress = () => {
   return (
     <Row justify="center" align="top">
       <Space direction="vertical" align="center">
-        <div>
-          <Select
-            showSearch
-            placeholder="Select a meeting"
-            style={{ width: "25rem" }}
-            size="large"
-            onChange={handleChange}
-          >
-            {meetings.map(m => (
-              <Option value={m.id} key={m.id}>
-                {m.meeting.name}
-              </Option>
-            ))}
-          </Select>
-          {!!selected && (
-            <Card style={{ width: "25rem" }} bordered={false} size="small">
-              <p>{selected.toString()}</p>
-            </Card>
-          )}
-        </div>
+        <Select
+          showSearch
+          placeholder="Select a meeting"
+          style={{ width: "20rem" }}
+          size="large"
+          onChange={handleChange}
+        >
+          {meetings.map(m => (
+            <Option value={m.id} key={m.id}>
+              {m.meeting.name}
+            </Option>
+          ))}
+        </Select>
+        {!!selected && (
+          <Card style={{ width: "20rem" }} bordered={false} size="small">
+            <p>{selected.toString()}</p>
+          </Card>
+        )}
         {!!selected && (
           <ProgressStatus
             duration={selected.duration}
