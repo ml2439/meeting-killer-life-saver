@@ -9,6 +9,7 @@ module.exports = {
     url: `https://meetingkiller.netlify.app/`,
   },
   plugins: [
+    `gatsby-plugin-antd`,
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
     {

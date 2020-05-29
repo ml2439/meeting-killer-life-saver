@@ -11,6 +11,7 @@
     "antd": "^4.2.3",
     "firebase": "^7.14.4",
     "gatsby": "^2.19.45",
+    "gatsby-plugin-antd": "^2.2.0",
     "gatsby-plugin-emotion": "^4.2.0",
     "gatsby-plugin-firebase": "^0.2.0-beta.4",
     "gatsby-plugin-manifest": "^2.3.1",
