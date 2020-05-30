@@ -1,33 +1,37 @@
 import React from "react"
 import { useMeetings } from "../../hooks/useMeetings"
-import { List, Alert, Row, Col } from "antd"
+import { List, Alert, Row, Col, Spin } from "antd"
 import { MeetingDrawer } from "./meetingDrawer"
 
 export const MeetingList = () => {
-  const [meetings, error] = useMeetings()
+  const [meetings, error, isLoading] = useMeetings()
 
   let toRender
-  if (error) {
-    toRender = <Alert message={error.message} type="error" />
-  } else if (!meetings || meetings.length === 0) {
-    toRender = <Alert message="No meetings found" type="warning" />
+  if (isLoading) {
+    toRender = <Spin />
   } else {
-    toRender = (
-      <List
-        size="small"
-        bordered={false}
-        dataSource={meetings}
-        footer={<MeetingDrawer />}
-        renderItem={item => (
-          <List.Item actions={[<MeetingDrawer meeting={item.meeting} />]}>
-            <List.Item.Meta
-              title={item.meeting.name}
-              description={item.meeting.toString()}
-            />
-          </List.Item>
-        )}
-      />
-    )
+    if (error) {
+      toRender = <Alert message={error.message} type="error" />
+    } else if (!meetings || meetings.length === 0) {
+      toRender = <Alert message="No meetings found" type="warning" />
+    } else {
+      toRender = (
+        <List
+          size="small"
+          bordered={false}
+          dataSource={meetings}
+          footer={<MeetingDrawer />}
+          renderItem={item => (
+            <List.Item actions={[<MeetingDrawer meeting={item.meeting} />]}>
+              <List.Item.Meta
+                title={item.meeting.name}
+                description={item.meeting.toString()}
+              />
+            </List.Item>
+          )}
+        />
+      )
+    }
   }
 
   return (
