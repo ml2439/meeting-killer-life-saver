@@ -1,24 +1,20 @@
 import React from "react"
 import { useMeetings } from "../../hooks/useMeetings"
-import { List, Alert, Spin } from "antd"
+import { List, Alert } from "antd"
 import { MeetingDrawer } from "./meetingDrawer"
 
 export const MeetingList = () => {
   const [meetings, error, isLoading] = useMeetings()
 
-  if (isLoading) {
-    return <Spin />
-  }
   if (error) {
     return <Alert message={error.message} type="error" />
   }
-  if (!meetings || meetings.length === 0) {
-    return <Alert message="No meetings found" type="warning" />
-  }
+
   return (
     <List
       size="small"
       bordered={false}
+      loading={isLoading}
       dataSource={meetings}
       footer={<MeetingDrawer />}
       renderItem={item => (
