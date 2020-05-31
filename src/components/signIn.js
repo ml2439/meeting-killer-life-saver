@@ -1,10 +1,10 @@
 import React from "react"
 import firebase from "gatsby-plugin-firebase"
-import { useUserStatus } from "../hooks/useUserStatus"
+import { useUser } from "../hooks/useUser"
 import { Button, notification } from "antd"
 
 export const SignIn = () => {
-  const isSignedIn = useUserStatus()
+  const isSignedIn = !!useUser()
 
   const handleSignInSignOut = () => {
     if (isSignedIn) {

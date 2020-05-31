@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react"
 import firebase from "gatsby-plugin-firebase"
 
-export const useUserStatus = () => {
-  const [isSignedIn, setIsSignedIn] = useState(false)
+export const useUser = () => {
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      setIsSignedIn(!!user)
+      setUser(user)
     })
     return () => unsubscribe()
   }, [])
 
-  return isSignedIn
+  return user
 }
