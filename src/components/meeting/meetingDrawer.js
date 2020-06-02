@@ -19,7 +19,7 @@ export const MeetingDrawer = props => {
     <Button
       type="link"
       onClick={showDrawer}
-      disabled={props.meeting.author !== user?.uid}
+      disabled={!user || props.meeting.author !== user?.uid}
     >
       Edit
     </Button>
