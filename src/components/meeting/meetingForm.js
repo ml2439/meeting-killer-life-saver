@@ -10,6 +10,7 @@ import {
 import firebase from "gatsby-plugin-firebase"
 import { Meeting, meetingConverter } from "../../data/meeting"
 import { camelCase } from "../../utils/massager"
+import { useUser } from "../../hooks/useUser"
 
 const layout = {
   labelCol: {
@@ -60,6 +61,7 @@ const fields = {
 }
 
 export const MeetingForm = props => {
+  const user = useUser()
   const initialValues = props.meeting
     ? {
         name: props.meeting.name,
@@ -68,26 +70,32 @@ export const MeetingForm = props => {
       }
     : null
 
-  const handleSubmit = ({ name, duration, start }) => {
-    const newMeeting = new Meeting(name, duration, start.hour(), start.minute())
+  const handleSubmit = async ({ name, start, ...fields }) => {
+    const newMeeting = new Meeting({
+      name,
+      author: user.uid,
+      startHour: start.hour(),
+      startMinute: start.minute(),
+      ...fields,
+    })
 
-    firebase
-      .firestore()
-      .collection("meetings")
-      .doc(camelCase(name))
-      .withConverter(meetingConverter)
-      .set(newMeeting)
-      .then(() => {
-        notification.success({
-          message: `Successfully created meeting: ${name}`,
-        })
-        props.onSubmitSuccess()
+    try {
+      await firebase
+        .firestore()
+        .collection("meetings")
+        .doc(camelCase(name))
+        .withConverter(meetingConverter)
+        .set(newMeeting)
+
+      notification.success({
+        message: `Successfully created meeting: ${name}`,
       })
-      .catch(error => {
-        notification.error({
-          message: error.message,
-        })
+      props.onSubmitSuccess()
+    } catch (error) {
+      notification.error({
+        message: `Failed submitting meeting: ${name}. ${error}`,
       })
+    }
   }
 
   return (

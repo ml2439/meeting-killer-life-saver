@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import { Drawer, Button } from "antd"
 import { MeetingForm } from "./meetingForm"
+import { useUser } from "../../hooks/useUser"
 
 export const MeetingDrawer = props => {
   const [visible, setVisible] = useState(false)
+  const user = useUser()
 
   const showDrawer = () => {
     setVisible(true)
@@ -14,7 +16,11 @@ export const MeetingDrawer = props => {
   }
 
   const button = props.meeting ? (
-    <Button type="link" onClick={showDrawer}>
+    <Button
+      type="link"
+      onClick={showDrawer}
+      disabled={props.meeting.author !== user?.uid}
+    >
       Edit
     </Button>
   ) : (

@@ -2,11 +2,12 @@ import moment from "moment"
 import { twoDigitTime } from "../utils/massager"
 
 export class Meeting {
-  constructor(name, duration, startHour, startMinute) {
-    this.name = name
-    this.duration = duration
-    this.startHour = startHour
-    this.startMinute = startMinute
+  constructor(fields) {
+    this.name = fields.name
+    this.duration = fields.duration
+    this.startHour = fields.startHour
+    this.startMinute = fields.startMinute
+    this.author = fields.author
   }
 
   toString() {
@@ -29,15 +30,11 @@ export const meetingConverter = {
       duration: Number(meeting.duration),
       startHour: Number(meeting.startHour),
       startMinute: Number(meeting.startMinute),
+      author: meeting.author
     }
   },
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options)
-    return new Meeting(
-      data.name,
-      data.duration,
-      data.startHour,
-      data.startMinute
-    )
+    return new Meeting(data)
   },
 }
