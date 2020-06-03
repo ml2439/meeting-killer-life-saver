@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import { Drawer, Button } from "antd"
 import { MeetingForm } from "./meetingForm"
 import { useUser } from "../../hooks/useUser"
+import { EditOutlined, PlusOutlined } from "@ant-design/icons"
 
 export const MeetingDrawer = props => {
   const [visible, setVisible] = useState(false)
@@ -18,13 +19,18 @@ export const MeetingDrawer = props => {
   const button = props.meeting ? (
     <Button
       type="link"
+      icon={<EditOutlined />}
       onClick={showDrawer}
       disabled={!user || props.meeting.author !== user?.uid}
-    >
-      Edit
-    </Button>
+    />
   ) : (
-    <Button type="link" size="large" onClick={showDrawer}>
+    <Button
+      type="link"
+      icon={<PlusOutlined />}
+      size="large"
+      onClick={showDrawer}
+      disabled={!user}
+    >
       Add a Meeting
     </Button>
   )

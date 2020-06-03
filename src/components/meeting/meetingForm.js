@@ -73,7 +73,7 @@ export const MeetingForm = props => {
   const handleSubmit = async ({ name, start, ...fields }) => {
     const newMeeting = new Meeting({
       name,
-      author: user.uid,
+      author: user?.uid,
       startHour: start.hour(),
       startMinute: start.minute(),
       ...fields,
@@ -93,7 +93,8 @@ export const MeetingForm = props => {
       props.onSubmitSuccess()
     } catch (error) {
       notification.error({
-        message: `Failed submitting meeting: ${name}. ${error}`,
+        message: `Failed submitting meeting: ${name}`,
+        description: `${error}`,
       })
     }
   }
