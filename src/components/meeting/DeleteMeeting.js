@@ -3,6 +3,7 @@ import firebase from "gatsby-plugin-firebase"
 import { Button, notification } from "antd"
 import { DeleteOutlined } from "@ant-design/icons"
 import { useUser } from "../../hooks/useUser"
+import { Meeting } from "../../data/meeting"
 
 export const DeleteMeeting = props => {
   const user = useUser()
@@ -10,7 +11,7 @@ export const DeleteMeeting = props => {
   const handleDelete = () => {
     firebase
       .firestore()
-      .collection("meetings")
+      .collection(Meeting.COLLECTION_ID)
       .doc(props.meeting?.id)
       .delete()
       .then(() => {

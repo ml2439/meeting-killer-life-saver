@@ -83,7 +83,7 @@ export const MeetingForm = props => {
     try {
       await firebase
         .firestore()
-        .collection("meetings")
+        .collection(Meeting.COLLECTION_ID)
         .doc(camelCase(name))
         .withConverter(meetingConverter)
         .set(newMeeting)

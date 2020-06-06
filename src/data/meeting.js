@@ -2,6 +2,8 @@ import moment from "moment"
 import { twoDigitTime, camelCase } from "../utils/massager"
 
 export class Meeting {
+  static COLLECTION_ID = "meetings"
+
   constructor(fields) {
     this.id = camelCase(fields.name)
     this.name = fields.name

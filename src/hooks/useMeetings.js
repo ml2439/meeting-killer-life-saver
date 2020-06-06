@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import firebase from "gatsby-plugin-firebase"
-import { meetingConverter } from "../data/meeting"
+import { Meeting, meetingConverter } from "../data/meeting"
 
 export const useMeetings = () => {
   const [meetings, setMeetings] = useState([])
@@ -10,7 +10,7 @@ export const useMeetings = () => {
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
-      .collection("meetings")
+      .collection(Meeting.COLLECTION_ID)
       .withConverter(meetingConverter)
       .onSnapshot(
         snapshot => {
