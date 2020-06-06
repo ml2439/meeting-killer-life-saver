@@ -62,13 +62,14 @@ const fields = {
 
 export const MeetingForm = props => {
   const user = useUser()
-  const initialValues = props.meeting
-    ? {
+  const isNewAddition = !props.meeting
+  const initialValues = isNewAddition
+    ? null
+    : {
         name: props.meeting.name,
         duration: props.meeting.duration,
         start: props.meeting.getStartMoment(),
       }
-    : null
 
   const handleSubmit = async ({ name, start, ...fields }) => {
     const newMeeting = new Meeting({
@@ -88,7 +89,9 @@ export const MeetingForm = props => {
         .set(newMeeting)
 
       notification.success({
-        message: `Successfully created meeting: ${name}`,
+        message: `Successfully ${
+          isNewAddition ? "created" : "updated"
+        } meeting: ${name}`,
       })
       props.onSubmitSuccess()
     } catch (error) {

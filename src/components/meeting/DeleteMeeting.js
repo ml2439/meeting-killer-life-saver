@@ -3,7 +3,6 @@ import firebase from "gatsby-plugin-firebase"
 import { Button, notification } from "antd"
 import { DeleteOutlined } from "@ant-design/icons"
 import { useUser } from "../../hooks/useUser"
-import { camelCase } from "../../utils/massager"
 
 export const DeleteMeeting = props => {
   const user = useUser()
@@ -12,7 +11,7 @@ export const DeleteMeeting = props => {
     firebase
       .firestore()
       .collection("meetings")
-      .doc(camelCase(props.meeting?.name))
+      .doc(props.meeting?.id)
       .delete()
       .then(() => {
         notification.success({

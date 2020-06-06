@@ -1,8 +1,9 @@
 import moment from "moment"
-import { twoDigitTime } from "../utils/massager"
+import { twoDigitTime, camelCase } from "../utils/massager"
 
 export class Meeting {
   constructor(fields) {
+    this.id = camelCase(fields.name)
     this.name = fields.name
     this.duration = fields.duration
     this.startHour = fields.startHour
@@ -26,11 +27,12 @@ export class Meeting {
 export const meetingConverter = {
   toFirestore: meeting => {
     return {
+      id: meeting.id,
       name: meeting.name,
       duration: Number(meeting.duration),
       startHour: Number(meeting.startHour),
       startMinute: Number(meeting.startMinute),
-      author: meeting.author
+      author: meeting.author,
     }
   },
   fromFirestore: (snapshot, options) => {
