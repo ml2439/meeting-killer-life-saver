@@ -27,6 +27,24 @@ const tailLayout = {
   },
 }
 
+const checkName = async (rule, value) => {
+  if (!value) {
+    return Promise.reject()
+  }
+  await firebase
+    .firestore()
+    .collection(Meeting.COLLECTION_ID)
+    .doc(camelCase(value))
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        return Promise.reject(`${value} already exists!`)
+      } else {
+        return Promise.resolve()
+      }
+    })
+}
+
 const fields = {
   name: {
     label: "Name",
@@ -35,6 +53,9 @@ const fields = {
       {
         required: true,
         message: "Please input your meeting name",
+      },
+      {
+        validator: checkName,
       },
     ],
   },
@@ -109,7 +130,7 @@ export const MeetingForm = props => {
       initialValues={initialValues}
       onFinish={handleSubmit}
     >
-      <Form.Item {...fields.name}>
+      <Form.Item {...fields.name} validateTrigger="onBlur">
         <Input disabled={!!initialValues} />
       </Form.Item>
       <Form.Item {...fields.start}>
