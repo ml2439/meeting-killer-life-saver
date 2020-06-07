@@ -43,21 +43,13 @@ const checkName = async (rule, value) => {
         return Promise.resolve()
       }
     })
+  // antd validator's callback needs to await Promise to reject or resolve
 }
 
 const fields = {
   name: {
     label: "Name",
     name: "name",
-    rules: [
-      {
-        required: true,
-        message: "Please input your meeting name",
-      },
-      {
-        validator: checkName,
-      },
-    ],
   },
   duration: {
     label: "Duration (minutes)",
@@ -84,6 +76,26 @@ const fields = {
 export const MeetingForm = props => {
   const user = useUser()
   const isNewAddition = !props.meeting
+
+  // assigning instead of pushing for newAddition to prevent adding validator multiple times
+  if (isNewAddition) {
+    fields.name.rules = [
+      {
+        required: true,
+        message: "Please input your meeting name",
+      },
+      {
+        validator: checkName,
+      },
+    ]
+  } else {
+    fields.name.rules = [
+      {
+        required: true,
+        message: "Please input your meeting name",
+      },
+    ]
+  }
   const initialValues = isNewAddition
     ? null
     : {
