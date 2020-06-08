@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import firebase from "gatsby-plugin-firebase"
-import { Meeting, meetingConverter } from "../data/meeting"
+import { Meeting, meetingConverter } from "../models/meeting"
 
 export const useMeetings = () => {
   const [meetings, setMeetings] = useState([])

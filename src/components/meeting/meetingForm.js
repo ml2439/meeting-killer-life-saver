@@ -8,7 +8,7 @@ import {
   InputNumber,
 } from "antd"
 import firebase from "gatsby-plugin-firebase"
-import { Meeting, meetingConverter } from "../../data/meeting"
+import { Meeting, meetingConverter } from "../../models/meeting"
 import { camelCase } from "../../utils/massager"
 import { useUser } from "../../hooks/useUser"
 
@@ -107,7 +107,7 @@ export const MeetingForm = props => {
   const handleSubmit = async ({ name, start, ...fields }) => {
     const newMeeting = new Meeting({
       name,
-      author: user?.uid,
+      host: user?.uid,
       startHour: start.hour(),
       startMinute: start.minute(),
       ...fields,

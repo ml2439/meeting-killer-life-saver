@@ -3,7 +3,7 @@ import firebase from "gatsby-plugin-firebase"
 import { Button, notification } from "antd"
 import { DeleteOutlined } from "@ant-design/icons"
 import { useUser } from "../../hooks/useUser"
-import { Meeting } from "../../data/meeting"
+import { Meeting } from "../../models/meeting"
 
 export const DeleteMeeting = props => {
   const user = useUser()
@@ -32,7 +32,7 @@ export const DeleteMeeting = props => {
       type="link"
       icon={<DeleteOutlined />}
       onClick={handleDelete}
-      disabled={!user || props.meeting?.author !== user?.uid}
+      disabled={!user || props.meeting?.host !== user?.uid}
     />
   )
 }

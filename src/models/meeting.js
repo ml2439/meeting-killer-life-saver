@@ -10,7 +10,7 @@ export class Meeting {
     this.duration = fields.duration
     this.startHour = fields.startHour
     this.startMinute = fields.startMinute
-    this.author = fields.author
+    this.host = fields.host
   }
 
   toString() {
@@ -34,7 +34,7 @@ export const meetingConverter = {
       duration: Number(meeting.duration),
       startHour: Number(meeting.startHour),
       startMinute: Number(meeting.startMinute),
-      author: meeting.author,
+      host: meeting.host,
     }
   },
   fromFirestore: (snapshot, options) => {

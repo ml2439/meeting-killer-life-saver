@@ -21,7 +21,7 @@ export const MeetingDrawer = props => {
       type="link"
       icon={<EditOutlined />}
       onClick={showDrawer}
-      disabled={!user || props.meeting.author !== user?.uid}
+      disabled={!user || props.meeting.host !== user?.uid}
     />
   ) : (
     <Button
