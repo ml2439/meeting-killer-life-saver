@@ -7,10 +7,12 @@ import {
   TimePicker,
   InputNumber,
 } from "antd"
-import firebase from "gatsby-plugin-firebase"
-import { Meeting, meetingConverter } from "../../models/meeting"
-import { camelCase } from "../../utils/massager"
+import { Meeting } from "../../models/meeting"
 import { useUser } from "../../hooks/useUser"
+import {
+  validateMeetingName,
+  setMeeting,
+} from "../../server/meeting/meetingFirestore"
 
 const layout = {
   labelCol: {
@@ -31,19 +33,9 @@ const checkName = async (rule, value) => {
   if (!value) {
     return Promise.reject()
   }
-  await firebase
-    .firestore()
-    .collection(Meeting.COLLECTION_ID)
-    .doc(camelCase(value))
-    .get()
-    .then(doc => {
-      if (doc.exists) {
-        return Promise.reject(`${value} already exists!`)
-      } else {
-        return Promise.resolve()
-      }
-    })
-  // antd validator's callback needs to await Promise to reject or resolve
+
+  // antd validator's callback needs to await Promise to settle
+  await validateMeetingName(value)
 }
 
 const fields = {
@@ -114,18 +106,14 @@ export const MeetingForm = props => {
     })
 
     try {
-      await firebase
-        .firestore()
-        .collection(Meeting.COLLECTION_ID)
-        .doc(camelCase(name))
-        .withConverter(meetingConverter)
-        .set(newMeeting)
+      await setMeeting(newMeeting)
 
       notification.success({
         message: `Successfully ${
           isNewAddition ? "created" : "updated"
         } meeting: ${name}`,
       })
+
       props.onSubmitSuccess()
     } catch (error) {
       notification.error({

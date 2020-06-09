@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
-import firebase from "gatsby-plugin-firebase"
-import { Meeting, meetingConverter } from "../models/meeting"
+import { queryUnarchivedMeetings } from "../server/meeting/meetingFirestore"
 
 export const useMeetings = () => {
   const [meetings, setMeetings] = useState([])
@@ -8,24 +7,20 @@ export const useMeetings = () => {
   const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .collection(Meeting.COLLECTION_ID)
-      .withConverter(meetingConverter)
-      .onSnapshot(
-        snapshot => {
-          setMeetings(
-            snapshot.docs.map(doc => {
-              return { id: doc.id, meeting: doc.data() }
-            })
-          )
-          setIsLoading(false)
-        },
-        error => {
-          setError(error)
-          setIsLoading(false)
-        }
-      )
+    const unsubscribe = queryUnarchivedMeetings(
+      snapshot => {
+        setMeetings(
+          snapshot.docs.map(doc => {
+            return { id: doc.id, meeting: doc.data() }
+          })
+        )
+        setIsLoading(false)
+      },
+      error => {
+        setError(error)
+        setIsLoading(false)
+      }
+    )
     return () => unsubscribe()
   }, [])
 

@@ -11,6 +11,7 @@ export class Meeting {
     this.startHour = fields.startHour
     this.startMinute = fields.startMinute
     this.host = fields.host
+    this.archived = false
   }
 
   toString() {
@@ -35,6 +36,7 @@ export const meetingConverter = {
       startHour: Number(meeting.startHour),
       startMinute: Number(meeting.startMinute),
       host: meeting.host,
+      archived: meeting.archived,
     }
   },
   fromFirestore: (snapshot, options) => {

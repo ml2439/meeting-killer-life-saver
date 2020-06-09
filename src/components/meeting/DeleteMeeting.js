@@ -1,19 +1,14 @@
 import React from "react"
-import firebase from "gatsby-plugin-firebase"
 import { Button, notification } from "antd"
 import { DeleteOutlined } from "@ant-design/icons"
 import { useUser } from "../../hooks/useUser"
-import { Meeting } from "../../models/meeting"
+import { archiveMeeting } from "../../server/meeting/meetingFirestore"
 
 export const DeleteMeeting = props => {
   const user = useUser()
 
   const handleDelete = () => {
-    firebase
-      .firestore()
-      .collection(Meeting.COLLECTION_ID)
-      .doc(props.meeting?.id)
-      .delete()
+    archiveMeeting(props.meeting?.id)
       .then(() => {
         notification.success({
           message: `Successfully deleted meeting: ${props.meeting?.name}`,
