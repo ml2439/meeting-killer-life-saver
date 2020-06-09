@@ -2,17 +2,21 @@ import firebase from "gatsby-plugin-firebase"
 import { Meeting, meetingConverter } from "../../models/meeting"
 import { camelCase } from "../../utils/massager"
 
-const meetingCollection = firebase.firestore().collection(Meeting.COLLECTION_ID)
-
 export const setMeeting = async newMeeting => {
-  return meetingCollection
+  return firebase
+    .firestore()
+    .collection(Meeting.COLLECTION_ID)
     .doc(camelCase(newMeeting.name))
     .withConverter(meetingConverter)
     .set(newMeeting)
 }
 
 export const archiveMeeting = async id => {
-  return meetingCollection.doc(id).update({ archived: true })
+  return firebase
+    .firestore()
+    .collection(Meeting.COLLECTION_ID)
+    .doc(id)
+    .update({ archived: true })
 }
 
 export const queryUnarchivedMeetings = (onNext, onError) => {
@@ -25,7 +29,9 @@ export const queryUnarchivedMeetings = (onNext, onError) => {
 }
 
 export const validateMeetingName = async name => {
-  return meetingCollection
+  return firebase
+    .firestore()
+    .collection(Meeting.COLLECTION_ID)
     .doc(camelCase(name))
     .get()
     .then(meeting => {
