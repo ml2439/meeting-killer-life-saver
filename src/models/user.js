@@ -18,8 +18,8 @@ export const userConverter = {
       name: user.name,
       email: user.email,
       photoUrl: user.photoUrl,
-      meetingsAttended: user.meetingsAttended,
-      meetingsHosted: user.meetingsHosted,
+      meetingsAttended: user.meetingsAttended || [],
+      meetingsHosted: user.meetingsHosted || [],
     }
   },
   fromFirestore: (snapshot, options) => {
