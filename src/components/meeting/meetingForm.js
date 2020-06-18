@@ -7,11 +7,11 @@ import {
   TimePicker,
   InputNumber,
 } from "antd"
-import { Meeting } from "../../models/meeting"
 import { useUser } from "../../hooks/useUser"
 import {
   validateMeetingName,
   setMeeting,
+  updateMeeting,
 } from "../../server/meeting/meetingFirestore"
 
 const layout = {
@@ -97,16 +97,25 @@ export const MeetingForm = props => {
       }
 
   const handleSubmit = async ({ name, start, ...fields }) => {
-    const newMeeting = new Meeting({
-      name,
-      host: user?.uid,
+    const fieldmap = {
       startHour: start.hour(),
       startMinute: start.minute(),
+      modifiedAt: new Date().toISOString(),
       ...fields,
-    })
+    }
+
+    if (isNewAddition) {
+      fieldmap.name = name
+      fieldmap.host = user?.uid
+      fieldmap.createdAt = new Date().toISOString()
+    } else {
+      fieldmap.modifiedAt = new Date().toISOString()
+    }
 
     try {
-      await setMeeting(newMeeting)
+      await (isNewAddition
+        ? setMeeting(fieldmap)
+        : updateMeeting(props.meeting?.id, fieldmap))
 
       notification.success({
         message: `Successfully ${

@@ -5,13 +5,15 @@ export class Meeting {
   static COLLECTION_ID = "meetings"
 
   constructor(fields) {
-    this.id = camelCase(fields.name)
     this.name = fields.name
     this.duration = fields.duration
     this.startHour = fields.startHour
     this.startMinute = fields.startMinute
     this.host = fields.host
-    this.archived = false
+    this.id = fields.id || camelCase(fields.name)
+    this.archived = fields.archived || false
+    this.createdAt = fields.createdAt
+    this.modifiedAt = fields.modifiedAt
   }
 
   toString() {
@@ -37,6 +39,8 @@ export const meetingConverter = {
       startMinute: Number(meeting.startMinute),
       host: meeting.host,
       archived: meeting.archived,
+      createdAt: meeting.createdAt,
+      modifiedAt: meeting.modifiedAt,
     }
   },
   fromFirestore: (snapshot, options) => {

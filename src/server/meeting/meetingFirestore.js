@@ -11,6 +11,15 @@ export const setMeeting = async newMeeting => {
     .set(newMeeting)
 }
 
+export const updateMeeting = async (id, fieldmap) => {
+  return firebase
+    .firestore()
+    .collection(Meeting.COLLECTION_ID)
+    .doc(id)
+    .withConverter(meetingConverter)
+    .update(fieldmap)
+}
+
 export const archiveMeeting = async id => {
   return firebase
     .firestore()
